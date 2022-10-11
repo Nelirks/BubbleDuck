@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 4461104397048318667}
   - component: {fileID: 4461104397048318671}
   - component: {fileID: 4461104397048318664}
+  - component: {fileID: 4461104397185578931}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -149,7 +150,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8a421dcb2ecf2a84581eec41099c557c, type: 2}
+  - {fileID: 2100000, guid: 0e60f921a2a6ee34b8600e01564b1237, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -215,3 +216,15 @@ MonoBehaviour:
   speed: 10
   jumpForce: 500
   turnSpeed: 20
+--- !u!114 &4461104397185578931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4461104397048318665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ea038b454bd2d4793595b7dd1b62d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
