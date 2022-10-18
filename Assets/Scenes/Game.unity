@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfeb862ce5b03c40a7cd52968502cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLevel: 1
+  maxLevel: 2
   player: {fileID: 0}
 --- !u!1001 &1970692458
 PrefabInstance:
