@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
+	private Level level;
+
+	public void SubscribeToLevel(Level level) {
+		this.level = level;
+	}
+
 	private void OnTriggerEnter(Collider other) {
-		Debug.Log("Collision");
+		level.NotifyBubbleCaught(this);
 		Destroy(gameObject);
 	}
 }
