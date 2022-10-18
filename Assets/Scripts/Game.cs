@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
-    private int currentLevel;
+    [SerializeField] int currentLevel;
 	[SerializeField] private int maxLevel;
 	public Player player;
 
@@ -35,7 +35,6 @@ public class Game : MonoBehaviour
 	}
 
 	private IEnumerator LoadFirstLevel() {
-		currentLevel = 1;
 		AsyncOperation ao = SceneManager.LoadSceneAsync("Level" + currentLevel, LoadSceneMode.Additive);
 		yield return ao;
 	}
