@@ -11,8 +11,6 @@ public class Level : MonoBehaviour
 		foreach (Bubble bubble in GetComponentsInChildren<Bubble>()) {
 			AddBubble(bubble);
 		}
-		Debug.Log(Game.instance.player);
-		Debug.Log(Game.instance.player);
 		Game.instance.player.transform.position = GetComponentInChildren<SpawnPoint>().transform.position;
 	}
 
