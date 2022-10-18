@@ -57,4 +57,8 @@ public class PlayerController : MonoBehaviour
             transform.eulerAngles = new Vector2(0, rotation.y);
         }
     }
+
+    public void TeleportTo(Vector3 position) {
+        transform.position = position;
+    }
 }

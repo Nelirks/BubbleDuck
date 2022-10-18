@@ -27,16 +27,20 @@ public class Game : MonoBehaviour
 	}
 
 	private IEnumerator LoadNextLevel() {
+		player.gameObject.SetActive(false);
 		AsyncOperation ao = SceneManager.UnloadSceneAsync("Level" + currentLevel);
 		yield return ao;
 		++currentLevel;
 		ao = SceneManager.LoadSceneAsync("level" + currentLevel, LoadSceneMode.Additive);
 		yield return ao;
+		FindObjectOfType<Level>().Init();
+		Game.instance.player.gameObject.SetActive(true);
 	}
 
 	private IEnumerator LoadFirstLevel() {
 		AsyncOperation ao = SceneManager.LoadSceneAsync("Level" + currentLevel, LoadSceneMode.Additive);
 		yield return ao;
+		FindObjectOfType<Level>().Init();
 	}
 
 }

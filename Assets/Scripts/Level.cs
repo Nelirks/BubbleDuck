@@ -7,11 +7,11 @@ public class Level : MonoBehaviour
 {
     private List<Bubble> bubbles = new List<Bubble>();
 
-	private void Start() {
+	public void Init() {
+		Game.instance.player.controller.TeleportTo(GetComponentInChildren<SpawnPoint>().transform.position);
 		foreach (Bubble bubble in GetComponentsInChildren<Bubble>()) {
 			AddBubble(bubble);
 		}
-		Game.instance.player.transform.position = GetComponentInChildren<SpawnPoint>().transform.position;
 	}
 
 	private void AddBubble(Bubble bubble) {
