@@ -12,6 +12,7 @@ public class Level : MonoBehaviour
 		foreach (Bubble bubble in GetComponentsInChildren<Bubble>()) {
 			AddBubble(bubble);
 		}
+		UI.instance.SetBubbleCount(bubbles.Count);
 	}
 
 	private void AddBubble(Bubble bubble) {
@@ -21,6 +22,7 @@ public class Level : MonoBehaviour
 
 	public void NotifyBubbleCaught(Bubble bubble) {
 		bubbles.Remove(bubble);
+		UI.instance.SetBubbleCount(bubbles.Count);
 		if (bubbles.Count == 0) GoToNextLevel();
 	}
 
