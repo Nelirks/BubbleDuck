@@ -11,11 +11,20 @@ public class Game : MonoBehaviour
 
     public static Game instance;
 
+	private bool isPaused;
+
 	private void Start() {
 		if (instance != null) throw new System.Exception("Two instances of Game cannot coexist");
 		instance = this;
 		player = FindObjectOfType<Player>();
+		SetPause(false);
 		StartCoroutine(LoadFirstLevel());
+	}
+
+	private void Update() {
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			SetPause(!isPaused);
+		}
 	}
 
 	public void GoToNextLevel() {
@@ -43,4 +52,18 @@ public class Game : MonoBehaviour
 		FindObjectOfType<Level>().Init();
 	}
 
+	public void SetPause(bool pause) {
+		isPaused = pause;
+		Time.timeScale = pause ? 0 : 1;
+		player.controller.canMove = !pause;
+		UI.instance.DisplayPauseMenu(pause);
+		Cursor.lockState = pause ? CursorLockMode.None : CursorLockMode.Locked;
+		Cursor.visible = pause;
+	}
+
+	public void GoToMainMenu() {
+		SceneManager.LoadScene("Menu");
+	}
+
+	public bool IsPaused { get => isPaused; }
 }

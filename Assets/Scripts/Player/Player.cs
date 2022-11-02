@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
 	public PlayerController controller;
 
-	private void Start() {
+	private void Awake() {
 		controller = GetComponent<PlayerController>();
 	}
 }

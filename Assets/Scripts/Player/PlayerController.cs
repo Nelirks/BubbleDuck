@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
-    void Start() {
+    void Awake() {
         characterController = GetComponent<CharacterController>();
         rotation.y = transform.eulerAngles.y;
     }

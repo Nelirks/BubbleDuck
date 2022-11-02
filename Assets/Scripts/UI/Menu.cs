@@ -11,8 +11,10 @@ public class Menu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playButton = transform.Find("Buttons").Find("PlayButton").GetComponent<Button>();
-        quitButton = transform.Find("Buttons").Find("QuitButton").GetComponent<Button>();
+        foreach(Button button in FindObjectsOfType<Button>()) {
+            if (button.name == "PlayButton") playButton = button;
+            else if (button.name == "QuitButton") quitButton = button;
+		}
         RegisterButtons();
     }
 
