@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
         // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
         // as an acceleration (ms^-2)
-        moveDirection.y -= gravity * Time.deltaTime;
+        else moveDirection.y = characterController.velocity.y - gravity * Time.deltaTime;
 
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
@@ -60,5 +60,6 @@ public class PlayerController : MonoBehaviour
 
     public void TeleportTo(Vector3 position) {
         transform.position = position;
+        moveDirection = Vector3.zero;
     }
 }

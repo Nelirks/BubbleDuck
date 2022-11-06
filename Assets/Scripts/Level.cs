@@ -7,12 +7,22 @@ public class Level : MonoBehaviour
 {
     private List<Bubble> bubbles = new List<Bubble>();
 
+	public int despawnYLevel = -10;
+
+	private void Update() {
+		if (Game.instance.player.transform.position.y <= despawnYLevel) TeleportPlayerToSpawnPoint();
+	}
+
 	public void Init() {
-		Game.instance.player.controller.TeleportTo(GetComponentInChildren<SpawnPoint>().transform.position);
+		TeleportPlayerToSpawnPoint();
 		foreach (Bubble bubble in GetComponentsInChildren<Bubble>()) {
 			AddBubble(bubble);
 		}
 		UI.instance.SetBubbleCount(bubbles.Count);
+	}
+
+	private void TeleportPlayerToSpawnPoint() {
+		Game.instance.player.controller.TeleportTo(GetComponentInChildren<SpawnPoint>().transform.position);
 	}
 
 	private void AddBubble(Bubble bubble) {
