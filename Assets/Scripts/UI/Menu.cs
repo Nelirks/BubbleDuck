@@ -15,6 +15,8 @@ public class Menu : MonoBehaviour
             if (button.name == "PlayButton") playButton = button;
             else if (button.name == "QuitButton") quitButton = button;
 		}
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         RegisterButtons();
     }
 

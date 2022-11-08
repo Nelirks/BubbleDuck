@@ -28,11 +28,10 @@ public class Game : MonoBehaviour
 	}
 
 	public void GoToNextLevel() {
-		Debug.Log(currentLevel + " / " + maxLevel);
 		if (currentLevel < maxLevel) {
 			StartCoroutine(LoadNextLevel());
 		}
-		else Debug.Log("MAX LEVEL REACHED"); 
+		else GoToMainMenu();
 	}
 
 	private IEnumerator LoadNextLevel() {
