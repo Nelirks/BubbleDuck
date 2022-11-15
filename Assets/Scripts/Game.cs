@@ -31,24 +31,25 @@ public class Game : MonoBehaviour
 		if (currentLevel < maxLevel) {
 			StartCoroutine(LoadNextLevel());
 		}
-		else GoToMainMenu();
+		else StartCoroutine(GoToMainMenu());
 	}
 
 	private IEnumerator LoadNextLevel() {
-		player.gameObject.SetActive(false);
-		AsyncOperation ao = SceneManager.UnloadSceneAsync("Level" + currentLevel);
-		yield return ao;
+		player.controller.enabled = false;
+		yield return UI.instance.sceneTransition.Fade(SceneTransition.FadeDirection.IN);
+		yield return SceneManager.UnloadSceneAsync("Level" + currentLevel);
 		++currentLevel;
-		ao = SceneManager.LoadSceneAsync("level" + currentLevel, LoadSceneMode.Additive);
-		yield return ao;
+		yield return SceneManager.LoadSceneAsync("level" + currentLevel, LoadSceneMode.Additive);
 		FindObjectOfType<Level>().Init();
-		Game.instance.player.gameObject.SetActive(true);
+		yield return UI.instance.sceneTransition.Fade(SceneTransition.FadeDirection.OUT);
+		player.controller.enabled = true;
 	}
 
 	private IEnumerator LoadFirstLevel() {
 		AsyncOperation ao = SceneManager.LoadSceneAsync("Level" + currentLevel, LoadSceneMode.Additive);
 		yield return ao;
 		FindObjectOfType<Level>().Init();
+		yield return UI.instance.sceneTransition.Fade(SceneTransition.FadeDirection.OUT);
 	}
 
 	public void SetPause(bool pause) {
@@ -60,8 +61,11 @@ public class Game : MonoBehaviour
 		Cursor.visible = pause;
 	}
 
-	public void GoToMainMenu() {
-		SceneManager.LoadScene("Menu");
+	public IEnumerator GoToMainMenu() {
+		Time.timeScale = 1;
+		player.controller.enabled = false;
+		yield return UI.instance.sceneTransition.Fade(SceneTransition.FadeDirection.IN);
+		yield return SceneManager.LoadSceneAsync("Menu");
 	}
 
 	public bool IsPaused { get => isPaused; }

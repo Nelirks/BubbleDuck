@@ -9,6 +9,7 @@ public class UI : MonoBehaviour
     public static UI instance;
     private TextMeshProUGUI bubbles;
     private PauseMenu pauseMenu;
+    public SceneTransition sceneTransition;
     // Start is called before the first frame update
     void Awake()
     {
@@ -16,9 +17,10 @@ public class UI : MonoBehaviour
         instance = this;
         bubbles = transform.Find("Bubbles").GetComponent<TextMeshProUGUI>();
         pauseMenu = GetComponentInChildren<PauseMenu>();
+        sceneTransition = GetComponentInChildren<SceneTransition>();
     }
 
-    public void SetBubbleCount(int count) {
+	public void SetBubbleCount(int count) {
         bubbles.text = count.ToString();
 	}
 

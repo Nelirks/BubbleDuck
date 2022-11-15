@@ -7,6 +7,8 @@ using UnityEngine;
 //Code from https://sharpcoderblog.com/blog/third-person-camera-in-unity-3d
 public class PlayerController : MonoBehaviour
 {
+    private Rigidbody rb;
+
     public float speed = 7.5f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
@@ -23,7 +25,16 @@ public class PlayerController : MonoBehaviour
 
     void Awake() {
         characterController = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
         rotation.y = transform.eulerAngles.y;
+    }
+
+	public void OnDisable() {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+	}
+
+	private void OnEnable() {
+        rb.constraints = RigidbodyConstraints.None;
     }
 
     void Update() {

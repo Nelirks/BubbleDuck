@@ -30,6 +30,7 @@ public class PauseMenu : MonoBehaviour {
     }
 
     public void GoToMainMenu() {
-        Game.instance.GoToMainMenu();
+        Time.timeScale = 1;
+        StartCoroutine(Game.instance.GoToMainMenu());
     }
 }
