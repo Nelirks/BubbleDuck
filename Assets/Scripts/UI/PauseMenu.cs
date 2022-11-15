@@ -4,32 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour {
-    private Button resumeButton;
-    private Button mainMenuButton;
-    // Start is called before the first frame update
-    void Awake() {
-        foreach (Button button in FindObjectsOfType<Button>()) {
-            if (button.name == "ResumeButton") resumeButton = button;
-            else if (button.name == "MainMenuButton") mainMenuButton = button;
-        }
-    }
+    public Button resumeButton;
+    public Button mainMenuButton;
 
 	private void OnEnable() {
-        RegisterButtons();
+        EnableButtons();
     }
 
 	private void OnDisable() {
-        UnregisterButtons();
+        DisableButtons();
 	}
 
-	private void RegisterButtons() {
-        resumeButton.onClick.AddListener(ResumeGame);
-        mainMenuButton.onClick.AddListener(GoToMainMenu);
+	private void EnableButtons() {
+        resumeButton.interactable = true;
+        mainMenuButton.interactable = true;
     }
 
-    private void UnregisterButtons() {
-        resumeButton.onClick.RemoveListener(ResumeGame);
-        mainMenuButton.onClick.RemoveListener(GoToMainMenu);
+    private void DisableButtons() {
+        resumeButton.interactable = false;
+        mainMenuButton.interactable = false;
     }
 
     public void ResumeGame() {

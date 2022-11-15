@@ -6,37 +6,33 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    private Button playButton;
-    private Button quitButton;
+    public Button playButton;
+    public Button quitButton;
     // Start is called before the first frame update
     void Start()
     {
-        foreach(Button button in FindObjectsOfType<Button>()) {
-            if (button.name == "PlayButton") playButton = button;
-            else if (button.name == "QuitButton") quitButton = button;
-		}
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        RegisterButtons();
+        EnableButtons();
     }
 
-    private void RegisterButtons() {
-        playButton.onClick.AddListener(StartGame);
-        quitButton.onClick.AddListener(QuitGame);
+    private void EnableButtons() {
+        playButton.interactable = true;
+        quitButton.interactable = true;
 	}
 
-    private void UnregisterButtons() {
-        playButton.onClick.RemoveListener(StartGame);
-        quitButton.onClick.RemoveListener(QuitGame);
+    private void DisableButtons() {
+        playButton.interactable = false;
+        quitButton.interactable = false;
     }
 
     public void StartGame() {
-        UnregisterButtons();
+        DisableButtons();
         SceneManager.LoadSceneAsync("Game");
 	}
 
     public void QuitGame() {
-        UnregisterButtons();
+        DisableButtons();
     #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
     #else
