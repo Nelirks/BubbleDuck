@@ -12,13 +12,15 @@ public class PlayerController : MonoBehaviour
     public float speed = 7.5f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
-    public Transform playerCameraParent;
+    public Transform cameraParent;
+    public Transform characterModel;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 60.0f;
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     Vector2 rotation = Vector2.zero;
+    float characterRotationSpeed = 120;
 
     [HideInInspector]
     public bool canMove = true;
@@ -64,9 +66,20 @@ public class PlayerController : MonoBehaviour
             rotation.y += Input.GetAxis("Mouse X") * lookSpeed;
             rotation.x += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotation.x = Mathf.Clamp(rotation.x, -lookXLimit, lookXLimit);
-            playerCameraParent.localRotation = Quaternion.Euler(rotation.x, 0, 0);
+            cameraParent.localRotation = Quaternion.Euler(rotation.x, 0, 0);
             transform.eulerAngles = new Vector2(0, rotation.y);
+            RotateCharacterModel();
         }
+    }
+
+    private void RotateCharacterModel() {
+        if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) return;
+        float currentAngle = characterModel.localEulerAngles.y;
+        float targetAngle = -Vector2.SignedAngle(Vector2.left, new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))) + 180;
+        if (Mathf.Abs(targetAngle - currentAngle) < 1f) return;
+        else if (targetAngle > currentAngle && targetAngle - currentAngle < 179 || targetAngle < currentAngle && currentAngle - targetAngle > 179) 
+            characterModel.Rotate(new Vector3(0, 0, characterRotationSpeed * Time.deltaTime));
+        else characterModel.Rotate(new Vector3(0, 0, -characterRotationSpeed * Time.deltaTime));
     }
 
     public void TeleportTo(Vector3 position) {
