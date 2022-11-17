@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         float currentAngle = characterModel.localEulerAngles.y;
         float targetAngle = -Vector2.SignedAngle(Vector2.left, new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))) + 180;
         if (Mathf.Abs(targetAngle - currentAngle) < 1f) return;
-        else if (targetAngle > currentAngle && targetAngle - currentAngle < 179 || targetAngle < currentAngle && currentAngle - targetAngle > 179) 
+        else if (targetAngle > currentAngle && targetAngle - currentAngle < 178 || targetAngle < currentAngle && currentAngle - targetAngle > 178) 
             characterModel.Rotate(new Vector3(0, 0, characterRotationSpeed * Time.deltaTime));
         else characterModel.Rotate(new Vector3(0, 0, -characterRotationSpeed * Time.deltaTime));
     }
