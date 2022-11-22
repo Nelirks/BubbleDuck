@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour
     void Update() {
         if (characterController.isGrounded) {
             // We are grounded, so recalculate move direction based on axes
-            Vector3 forward = transform.TransformDirection(Vector3.forward);
-            Vector3 right = transform.TransformDirection(Vector3.right);
+            Vector3 forward = cameraParent.TransformDirection(Vector3.forward);
+            Vector3 right = cameraParent.TransformDirection(Vector3.right);
             float curSpeedX = canMove ? speed * Input.GetAxis("Vertical") : 0;
             float curSpeedY = canMove ? speed * Input.GetAxis("Horizontal") : 0;
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
             rotation.x += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotation.x = Mathf.Clamp(rotation.x, -lookXLimit, lookXLimit);
             cameraParent.localRotation = Quaternion.Euler(rotation.x, 0, 0);
-            transform.eulerAngles = new Vector2(0, rotation.y);
+            transform.eulerAngles = new Vector3(0, rotation.y, 0);
             RotateCharacterModel();
         }
     }
@@ -76,8 +76,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) return;
         float currentAngle = characterModel.localEulerAngles.y;
         float targetAngle = -Vector2.SignedAngle(Vector2.left, new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))) + 180;
+        Debug.Log(targetAngle + " -- " + currentAngle);
         if (Mathf.Abs(targetAngle - currentAngle) < 1f) return;
-        else if (targetAngle > currentAngle && targetAngle - currentAngle < 178 || targetAngle < currentAngle && currentAngle - targetAngle > 178) 
+        else if (targetAngle > currentAngle && targetAngle - currentAngle < 178 || targetAngle < currentAngle && currentAngle - targetAngle > 180)
             characterModel.Rotate(new Vector3(0, 0, characterRotationSpeed * Time.deltaTime));
         else characterModel.Rotate(new Vector3(0, 0, -characterRotationSpeed * Time.deltaTime));
     }
