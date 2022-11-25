@@ -20,6 +20,7 @@ public class Game : MonoBehaviour
 		instance = this;
 		spawnSFX = Resources.Load<AudioClip>("SoundEffect/Spawn");
 		player = FindObjectOfType<Player>();
+		player.controller.enabled = false;
 		SetPause(false);
 		StartCoroutine(LoadFirstLevel());
 	}
@@ -46,6 +47,7 @@ public class Game : MonoBehaviour
 		FindObjectOfType<Level>().Init();
 		SFXPlayer.instance.PlaySFX(spawnSFX);
 		yield return UI.instance.sceneTransition.Fade(SceneTransition.FadeDirection.OUT);
+		player.controller.ResetStats();
 		player.controller.enabled = true;
 	}
 
@@ -55,6 +57,8 @@ public class Game : MonoBehaviour
 		FindObjectOfType<Level>().Init();
 		SFXPlayer.instance.PlaySFX(spawnSFX);
 		yield return UI.instance.sceneTransition.Fade(SceneTransition.FadeDirection.OUT);
+		player.controller.ResetStats();
+		player.controller.enabled = true;
 	}
 
 	public void SetPause(bool pause) {

@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     private AudioClip jumpSFX;
 
     public float speed = 7.5f;
-    public float jumpSpeed = 8.0f;
+    [SerializeField] private float baseJumpSpeed = 8.0f;
+    [HideInInspector] public float jumpSpeed;
     public float gravity = 20.0f;
     public Transform cameraParent;
     public Transform characterModel;
@@ -33,6 +34,10 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rotation.y = transform.eulerAngles.y;
     }
+
+    public void ResetStats() {
+        jumpSpeed = baseJumpSpeed;
+	}
 
 	public void OnDisable() {
         rb.constraints = RigidbodyConstraints.FreezeAll;

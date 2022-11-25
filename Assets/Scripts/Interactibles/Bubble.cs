@@ -15,7 +15,7 @@ public class Bubble : MonoBehaviour
 		this.level = level;
 	}
 
-	private void OnTriggerEnter(Collider other) {
+	protected virtual void OnTriggerEnter(Collider other) {
 		level.NotifyBubbleCaught(this);
 		SFXPlayer.instance.PlaySFX(sfx);
 		Destroy(gameObject);
