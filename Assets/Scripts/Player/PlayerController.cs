@@ -46,7 +46,11 @@ public class PlayerController : MonoBehaviour
         if (characterController.isGrounded) {
             // We are grounded, so recalculate move direction based on axes
             Vector3 forward = cameraParent.TransformDirection(Vector3.forward);
+            forward.y = 0;
+            forward.Normalize();
             Vector3 right = cameraParent.TransformDirection(Vector3.right);
+            right.y = 0;
+            right.Normalize();
             float curSpeedX = canMove ? speed * Input.GetAxis("Vertical") : 0;
             float curSpeedY = canMove ? speed * Input.GetAxis("Horizontal") : 0;
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
@@ -80,7 +84,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) return;
         float currentAngle = characterModel.localEulerAngles.y;
         float targetAngle = -Vector2.SignedAngle(Vector2.left, new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))) + 180;
-        Debug.Log(targetAngle + " -- " + currentAngle);
         if (Mathf.Abs(targetAngle - currentAngle) < 1f) return;
         else if (targetAngle > currentAngle && targetAngle - currentAngle < 178 || targetAngle < currentAngle && currentAngle - targetAngle > 180)
             characterModel.Rotate(new Vector3(0, 0, characterRotationSpeed * Time.deltaTime));
