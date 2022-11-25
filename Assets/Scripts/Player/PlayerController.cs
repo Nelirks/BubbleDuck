@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
 
+    private AudioClip jumpSFX;
+
     public float speed = 7.5f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public bool canMove = true;
 
     void Awake() {
+        jumpSFX = Resources.Load<AudioClip>("SoundEffect/Jump");
         characterController = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         rotation.y = transform.eulerAngles.y;
@@ -50,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButton("Jump") && canMove) {
                 moveDirection.y = jumpSpeed;
+                SFXPlayer.instance.PlaySFX(jumpSFX);
             }
         }
 

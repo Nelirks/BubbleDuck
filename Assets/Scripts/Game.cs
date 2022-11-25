@@ -13,9 +13,12 @@ public class Game : MonoBehaviour
 
 	private bool isPaused;
 
+	private AudioClip spawnSFX;
+
 	private void Start() {
 		if (instance != null) throw new System.Exception("Two instances of Game cannot coexist");
 		instance = this;
+		spawnSFX = Resources.Load<AudioClip>("SoundEffect/Spawn");
 		player = FindObjectOfType<Player>();
 		SetPause(false);
 		StartCoroutine(LoadFirstLevel());
@@ -41,6 +44,7 @@ public class Game : MonoBehaviour
 		++currentLevel;
 		yield return SceneManager.LoadSceneAsync("level" + currentLevel, LoadSceneMode.Additive);
 		FindObjectOfType<Level>().Init();
+		SFXPlayer.instance.PlaySFX(spawnSFX);
 		yield return UI.instance.sceneTransition.Fade(SceneTransition.FadeDirection.OUT);
 		player.controller.enabled = true;
 	}
@@ -49,6 +53,7 @@ public class Game : MonoBehaviour
 		AsyncOperation ao = SceneManager.LoadSceneAsync("Level" + currentLevel, LoadSceneMode.Additive);
 		yield return ao;
 		FindObjectOfType<Level>().Init();
+		SFXPlayer.instance.PlaySFX(spawnSFX);
 		yield return UI.instance.sceneTransition.Fade(SceneTransition.FadeDirection.OUT);
 	}
 

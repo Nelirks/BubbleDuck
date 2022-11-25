@@ -5,6 +5,11 @@ using UnityEngine;
 public class Bubble : MonoBehaviour
 {
 	private Level level;
+	private static AudioClip sfx;
+
+	private void Start() {
+		if (sfx == null) sfx = Resources.Load<AudioClip>("SoundEffect/Bubble");
+	}
 
 	public void SubscribeToLevel(Level level) {
 		this.level = level;
@@ -12,6 +17,7 @@ public class Bubble : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other) {
 		level.NotifyBubbleCaught(this);
+		SFXPlayer.instance.PlaySFX(sfx);
 		Destroy(gameObject);
 	}
 }

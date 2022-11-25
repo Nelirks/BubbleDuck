@@ -17,6 +17,7 @@ public class MusicPlayer : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(transform.parent.gameObject);
         mainTheme = Resources.Load<AudioClip>("Music/MainTheme");
         audioSource = GetComponent<AudioSource>();
 	}
@@ -25,11 +26,5 @@ public class MusicPlayer : MonoBehaviour
     {
         audioSource.clip = mainTheme;
         audioSource.Play();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
