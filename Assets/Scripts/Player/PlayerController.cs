@@ -99,4 +99,9 @@ public class PlayerController : MonoBehaviour
         transform.position = position;
         moveDirection = Vector3.zero;
     }
+
+    public void SetRotation(Vector3 rotation) {
+        this.rotation = rotation;
+        transform.rotation = Quaternion.Euler(rotation);
+	}
 }

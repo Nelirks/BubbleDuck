@@ -23,6 +23,7 @@ public class Level : MonoBehaviour
 
 	private void TeleportPlayerToSpawnPoint() {
 		Game.instance.player.controller.TeleportTo(GetComponentInChildren<SpawnPoint>().transform.position);
+		Game.instance.player.controller.SetRotation(GetComponentInChildren<SpawnPoint>().transform.rotation.eulerAngles);
 	}
 
 	private void AddBubble(Bubble bubble) {
