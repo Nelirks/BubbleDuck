@@ -10,7 +10,10 @@ public class Level : MonoBehaviour
 	public int despawnYLevel = -10;
 
 	private void Update() {
-		if (Game.instance.player.transform.position.y <= despawnYLevel) TeleportPlayerToSpawnPoint();
+		if (Game.instance.player.transform.position.y <= despawnYLevel) {
+			Debug.Log("AAA");
+			TeleportPlayerToSpawnPoint();
+		}
 	}
 
 	public void Init() {
