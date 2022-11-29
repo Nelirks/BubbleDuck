@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
         // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
         // as an acceleration (ms^-2)
-        moveDirection.y = moveDirection.y - gravity * Time.deltaTime;
+        else moveDirection.y = moveDirection.y - gravity * Time.deltaTime;
 
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
@@ -85,7 +85,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void RotateCharacterModel() {
+	private void FixedUpdate() {
+		
+	}
+
+	private void RotateCharacterModel() {
         if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) return;
         float currentAngle = characterModel.localEulerAngles.y;
         float targetAngle = -Vector2.SignedAngle(Vector2.left, new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))) + 180;

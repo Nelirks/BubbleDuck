@@ -11,7 +11,6 @@ public class Level : MonoBehaviour
 
 	private void Update() {
 		if (Game.instance.player.transform.position.y <= despawnYLevel) {
-			Debug.Log("AAA");
 			TeleportPlayerToSpawnPoint();
 		}
 	}
