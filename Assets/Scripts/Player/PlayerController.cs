@@ -92,11 +92,11 @@ public class PlayerController : MonoBehaviour
 	private void RotateCharacterModel() {
         if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) return;
         float currentAngle = characterModel.localEulerAngles.y;
-        float targetAngle = -Vector2.SignedAngle(Vector2.left, new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))) + 180;
+        float targetAngle = -Vector2.SignedAngle(Vector2.up, new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))) + 180;
         if (Mathf.Abs(targetAngle - currentAngle) < 1f) return;
         else if (targetAngle > currentAngle && targetAngle - currentAngle < 178 || targetAngle < currentAngle && currentAngle - targetAngle > 180)
-            characterModel.Rotate(new Vector3(0, 0, characterRotationSpeed * Time.deltaTime));
-        else characterModel.Rotate(new Vector3(0, 0, -characterRotationSpeed * Time.deltaTime));
+            characterModel.Rotate(new Vector3(0, characterRotationSpeed * Time.deltaTime, 0));
+        else characterModel.Rotate(new Vector3(0, -characterRotationSpeed * Time.deltaTime, 0));
     }
 
     public void TeleportTo(Vector3 position) {
