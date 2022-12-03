@@ -39,7 +39,7 @@ public class Game : MonoBehaviour
 	}
 
 	private IEnumerator LoadNextLevel() {
-		player.controller.enabled = false;
+		DisablePlayer();
 		yield return UI.instance.sceneTransition.Fade(SceneTransition.FadeDirection.IN);
 		yield return SceneManager.UnloadSceneAsync("Level" + currentLevel);
 		++currentLevel;
@@ -47,8 +47,7 @@ public class Game : MonoBehaviour
 		FindObjectOfType<Level>().Init();
 		SFXPlayer.instance.PlaySFX(spawnSFX);
 		yield return UI.instance.sceneTransition.Fade(SceneTransition.FadeDirection.OUT);
-		player.controller.ResetStats();
-		player.controller.enabled = true;
+		EnablePlayer();
 	}
 
 	private IEnumerator LoadFirstLevel() {
@@ -57,8 +56,7 @@ public class Game : MonoBehaviour
 		FindObjectOfType<Level>().Init();
 		SFXPlayer.instance.PlaySFX(spawnSFX);
 		yield return UI.instance.sceneTransition.Fade(SceneTransition.FadeDirection.OUT);
-		player.controller.ResetStats();
-		player.controller.enabled = true;
+		EnablePlayer();
 	}
 
 	public void SetPause(bool pause) {
@@ -75,6 +73,17 @@ public class Game : MonoBehaviour
 		player.controller.enabled = false;
 		yield return UI.instance.sceneTransition.Fade(SceneTransition.FadeDirection.IN);
 		yield return SceneManager.LoadSceneAsync("Menu");
+	}
+
+	private void DisablePlayer() {
+		player.GetComponent<Collider>().enabled = false;
+		player.controller.enabled = false;
+	}
+
+	private void EnablePlayer() {
+		player.controller.ResetStats();
+		player.GetComponent<Collider>().enabled = true;
+		player.controller.enabled = true;
 	}
 
 	public bool IsPaused { get => isPaused; }

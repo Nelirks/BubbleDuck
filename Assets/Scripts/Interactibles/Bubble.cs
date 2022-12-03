@@ -7,12 +7,17 @@ public class Bubble : MonoBehaviour
 	private Level level;
 	private static AudioClip sfx;
 
+	private void Awake() {
+		GetComponent<Collider>().enabled = false;
+	}
+
 	private void Start() {
 		if (sfx == null) sfx = Resources.Load<AudioClip>("SoundEffect/Bubble");
 	}
 
 	public void SubscribeToLevel(Level level) {
 		this.level = level;
+		GetComponent<Collider>().enabled = true;
 	}
 
 	protected virtual void OnTriggerEnter(Collider other) {
