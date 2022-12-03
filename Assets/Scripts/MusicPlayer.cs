@@ -16,7 +16,6 @@ public class MusicPlayer : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(transform.parent.gameObject);
         mainTheme = Resources.Load<AudioClip>("Music/MainTheme");
         audioSource = GetComponent<AudioSource>();

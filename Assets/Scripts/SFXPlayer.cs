@@ -14,7 +14,6 @@ public class SFXPlayer : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
         audioSource = GetComponent<AudioSource>();
     }
     // Start is called before the first frame update
