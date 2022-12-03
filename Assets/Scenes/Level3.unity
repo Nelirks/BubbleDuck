@@ -1984,6 +1984,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 500900116092476787, guid: 293481488704a7e4ea8bc6c0427e3472, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 500900116092476787, guid: 293481488704a7e4ea8bc6c0427e3472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 500900116092476787, guid: 293481488704a7e4ea8bc6c0427e3472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1490915960680498098, guid: 293481488704a7e4ea8bc6c0427e3472, type: 3}
       propertyPath: m_Convex
       value: 0
