@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 1
-  maxLevel: 4
+  maxLevel: 5
   player: {fileID: 0}
 --- !u!1 &304701963
 GameObject:
